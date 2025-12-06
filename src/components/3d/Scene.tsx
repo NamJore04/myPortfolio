@@ -11,11 +11,9 @@ import { SceneContent } from './SceneContent';
 import { PostProcessing } from './effects/PostProcessing';
 import { EntryAnimationProvider } from '@/hooks/useEntryAnimation';
 import { usePerformance } from '@/hooks/usePerformance';
-import { usePortfolioStore } from '@/stores/usePortfolioStore';
 
 const SceneCanvas = () => {
   const { device, settings } = usePerformance();
-  const isDragging = usePortfolioStore((state) => state.isDragging);
 
   return (
     <div className="fixed inset-0 w-full h-full">
@@ -43,10 +41,7 @@ const SceneCanvas = () => {
           </EntryAnimationProvider>
           
           <OrbitControls 
-            enabled={!isDragging}
-            enablePan={!device.isMobile && !isDragging}
-            enableZoom={!isDragging}
-            enableRotate={!isDragging}
+            enablePan={!device.isMobile}
             target={[0, 0, 0]}
             // Limit rotation on mobile for better UX
             minPolarAngle={device.isMobile ? Math.PI / 4 : 0}

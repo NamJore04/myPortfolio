@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/* ============================================
+   Design Tokens - The Digital Nexus Garden
+   Cross-browser compatible CSS variables
+   ============================================ */
+:root {
+  /* Primary Colors */
+  --color-cyan: #00d4ff;
+  --color-purple: #a855f7;
+  --color-white: #f8fafc;
+  
+  /* Background */
+  --color-bg-deep: #0f172a;
+  --color-bg-grid: #1e3a5f;
+  
+  /* Secondary */
+  --color-green: #34d399;
+  --color-orange: #fb923c;
+  --color-pink: #f472b6;
+  --color-blue: #02569b;
+  
+  /* Text */
+  --color-text-muted: #94a3b8;
+  
+  /* Effects */
+  --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.5);
+  --glow-purple: 0 0 20px rgba(168, 85, 247, 0.5);
+  
+  /* Animation */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Font stacks with fallbacks */
+  --font-display: 'Orbitron', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+@theme inline {
+  --color-background: var(--color-bg-deep);
+  --color-foreground: var(--color-white);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+/* ============================================
+   Global Styles & Reset
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Prevent font scaling in landscape on iOS */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+html, body {
+  overflow: hidden;
+  background: var(--color-bg-deep);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  /* Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+/* Remove default focus outline (use focus-visible instead) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================
+   Cross-browser Fixes
+   ============================================ */
+
+/* Safari flexbox gap fix */
+@supports not (gap: 1rem) {
+  .flex > * + * {
+    margin-left: 1rem;
+  }
+}
+
+/* Safari backdrop-filter fallback */
+@supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+  .backdrop-blur-sm {
+    background-color: rgba(15, 23, 42, 0.95);
+  }
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-cyan) var(--color-bg-deep);
+}
+
+/* Webkit scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-cyan);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-purple);
+}
+
+/* ============================================
+   Custom Animations
+   ============================================ */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-grid-move {
+  animation: grid-move 20s linear infinite;
+}
+
+/* ============================================
+   Glow Effects
+   ============================================ */
+.glow-cyan {
+  box-shadow: var(--glow-cyan);
+}
+
+.glow-purple {
+  box-shadow: var(--glow-purple);
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 10px var(--color-cyan);
+}
+
+.glow-text-purple {
+  text-shadow: 0 0 10px var(--color-purple);
+}
+
+/* ============================================
+   Accessibility: Screen Reader Only
+   ============================================ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
+   WebGL/Canvas Styles
+   ============================================ */
+canvas {
+  display: block;
+  /* Prevent canvas from blocking text selection */
+  touch-action: none;
+  /* Prevent image drag on canvas */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  canvas, .no-print {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

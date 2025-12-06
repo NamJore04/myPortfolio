@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.vscode
+*.log
+.env.local
+memory-bank
+docs
+.github

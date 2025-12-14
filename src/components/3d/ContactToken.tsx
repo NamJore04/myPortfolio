@@ -51,8 +51,8 @@ export const CONTACTS: ContactConfig[] = [
   { 
     id: 'linkedin',
     label: 'LinkedIn',
-    value: 'Jore Nam',
-    href: 'https://linkedin.com/in/jore-nam-943a02236',
+    value: 'Nam Jore',
+    href: 'https://www.linkedin.com/in/namjore04/',
     brandColor: '#0077b5',
     glowColor: '#00d4ff',
     orbit: 6.5,

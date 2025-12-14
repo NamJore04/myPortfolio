@@ -15,7 +15,7 @@ export const profile: Profile = {
   },
   links: {
     github: 'github.com/NamJore04',
-    linkedin: 'linkedin.com/in/jore-nam-943a02236',
-    portfolio: 'namjore04.github.io/-Small-Project-Portfolio',
+    linkedin: 'linkedin.com/in/namjore04',
+    portfolio: 'namhuynh-portfolio.vercel.app',
   },
 };
